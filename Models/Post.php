@@ -84,33 +84,49 @@ class Post {
 
     // Create post
     public function create() {
-        $query = 'INSERT INTO ' . $this->table . '
-        SET
-            title = :title,
-            body = :body,
-            author = :author,
-            category_id = :category_id
-        ';
-
-        // Prepare statement
-        $stmt = $this->conn->prepare($query);
-
-        // Clean data
+//        $query = 'INSERT INTO ' . $this->table . '
+//        SET
+//            title = :title,
+//            body = :body,
+//            author = :author,
+//            category_id = :category_id,
+//            created_at = :created_at ,
+//        ';
+//
+//        // Prepare statement
+//        $stmt = $this->conn->prepare($query);
+//
+//        // Clean data
         $this->title = htmlspecialchars(strip_tags($this->title));
         $this->body = htmlspecialchars(strip_tags($this->body));
         $this->author = htmlspecialchars(strip_tags($this->author));
         $this->category_id = htmlspecialchars(strip_tags($this->category_id));
 
-        // Binda data
-        $stmt->bindParam(':title', $this->title);
-        $stmt->bindParam(':body', $this->body);
-        $stmt->bindParam(':author', $this->author);
-        $stmt->bindParam(':category_id', $this->category_id);
+//
+//        // Binda data
+//        $stmt->bindParam(':title', $this->title);
+//        $stmt->bindParam(':body', $this->body);
+//        $stmt->bindParam(':author', $this->author);
+//        $stmt->bindParam(':category_id', $this->category_id);
+//        $stmt->bindParam(':created_at', $this->created_at);
+//
+//        // Execute Query
+//        if ($stmt->execute()) {
+//            return true;
+//        }
 
-        // Execute Query
-        if ($stmt->execute()) {
+        $data = [
+            'title' => $this->title,
+            'body' => $this->body,
+            'author' => $this->author,
+            'category_id'=> $this->category_id,
+        ];
+        $sql = "INSERT INTO $this->table (title, body, author, category_id) VALUES (:title, :body, :author, :category_id)";
+        $stmt= $this->conn->prepare($sql);
+        if($stmt->execute($data)){
             return true;
         }
+
 
         // Print error if something goes wrong
         printf("Error : %s. \n", $stmt->error);
