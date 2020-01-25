@@ -26,6 +26,7 @@
         $post->title = $data->title;
         $post->body = $data->body;
         $post->author = $data->author;
+        $post->status = $data->status;
         $post->category_id = $data->category_id;
 
         // update post

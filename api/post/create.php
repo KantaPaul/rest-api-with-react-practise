@@ -24,6 +24,7 @@
         $post->body = $data->body;
         $post->author = $data->author;
         $post->category_id = $data->category_id;
+        $post->status = $data->status;
         
         // create post
         if ($post->create()) {

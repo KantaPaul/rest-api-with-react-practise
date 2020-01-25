@@ -33,9 +33,10 @@
                 'body' => html_entity_decode($body),
                 'author' => $author,
                 'category_id' => $category_id,
+                'status' => $status,
                 'category_name' => $category_name
             );
-
+            
             // array push
             array_push($posts_arr, $post_item);
         }

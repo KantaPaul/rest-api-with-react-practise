@@ -29,6 +29,7 @@
         'author' => $post->author,
         'category_id' => $post->category_id,
         'category_name' => $post->category_name,
+        'status' => $post->status,
         'created_at' => date_format($date, 'F j, Y'),
     );
 

@@ -13,6 +13,7 @@ class Post {
     public $body;
     public $author;
     public $created_at;
+    public $status;
 
     // contructor with db
     public function __construct($db) {
@@ -27,7 +28,8 @@ class Post {
                 p.title,
                 p.body,
                 p.author,
-                p.created_at
+                p.created_at,
+                p.status
                 FROM
                     '. $this->table .' p
                 LEFT JOIN
@@ -52,7 +54,8 @@ class Post {
                 p.title,
                 p.body,
                 p.author,
-                p.created_at
+                p.created_at,
+                p.status
                 FROM
                     '. $this->table .' p
                 LEFT JOIN
@@ -80,6 +83,7 @@ class Post {
         $this->category_id = $row['category_id'];
         $this->category_name = $row['category_name'];
         $this->created_at = $row['created_at'];
+        $this->status = $row['status'];
     }
 
     // Create post
@@ -89,7 +93,8 @@ class Post {
             title = :title,
             body = :body,
             author = :author,
-            category_id = :category_id
+            category_id = :category_id,
+            status = :status
         ';
 
         // Prepare statement
@@ -100,12 +105,14 @@ class Post {
         $this->body = htmlspecialchars(strip_tags($this->body));
         $this->author = htmlspecialchars(strip_tags($this->author));
         $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+        $this->status = htmlspecialchars(strip_tags($this->status));
 
         // Binda data
         $stmt->bindParam(':title', $this->title);
         $stmt->bindParam(':body', $this->body);
         $stmt->bindParam(':author', $this->author);
         $stmt->bindParam(':category_id', $this->category_id);
+        $stmt->bindParam(':status', $this->status);
 
         // Execute Query
         if ($stmt->execute()) {
@@ -125,7 +132,8 @@ class Post {
             title = :title,
             body = :body,
             author = :author,
-            category_id = :category_id
+            category_id = :category_id,
+            status = :status
         WHERE
             id  = :id
         ';
@@ -139,6 +147,7 @@ class Post {
         $this->body = htmlspecialchars(strip_tags($this->body));
         $this->author = htmlspecialchars(strip_tags($this->author));
         $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+        $this->status = htmlspecialchars(strip_tags($this->status));
 
         // Binda data
         $stmt->bindParam(':id', $this->id);
@@ -146,6 +155,7 @@ class Post {
         $stmt->bindParam(':body', $this->body);
         $stmt->bindParam(':author', $this->author);
         $stmt->bindParam(':category_id', $this->category_id);
+        $stmt->bindParam(':status', $this->status);
 
         // Execute Query
         if ($stmt->execute()) {
